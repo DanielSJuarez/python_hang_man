@@ -1,14 +1,18 @@
+import enum
+
+
 user_guesses = 10
-correct_answer = ['p', 'y', 't', 'h', 'o', 'n']
+# correct_answer = ['p', 'y', 't', 'h', 'o', 'n'] individual letters
+correct_answer = ['a', 'p', 'p', 'l', 'e'] #multiple letters
 available_letters_to_guess = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k',
                               'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
-user_guest_display = ['_', '_', '_', '_', '_', '_']
+user_guest_display = ['_', '_', '_', '_', '_']
 display_updated_answer = ''
 display_updated_alphabet = ''
 
 print('Welcome to hangman! Can you save me by guessing the correct word! You have',
       user_guesses, 'guesses to save me! Your word is', len(correct_answer), 'letters long')
-print('______')
+print('_____')
 
 while user_guesses > 0:
     guess = input('Guess a letter ')
@@ -23,10 +27,10 @@ while user_guesses > 0:
             print('Sorry, you have lost!! Better luck next time!!')
             break
         else:
-            display_replacement_placeholder = correct_answer.index(guess.lower())
-            user_guest_display.pop(display_replacement_placeholder)
-            user_guest_display.insert(
-            display_replacement_placeholder, guess.lower())
+            for index, value in enumerate(correct_answer):
+                    if value == guess.lower():
+                        user_guest_display.pop(index)
+                        user_guest_display.insert(index, guess.lower())
             user_guesses -= 1
             display_updated_answer = display_updated_answer.join(
                 user_guest_display)
